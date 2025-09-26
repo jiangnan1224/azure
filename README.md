@@ -56,6 +56,7 @@
 
 ```bash
 git clone https://github.com/SIJULY/azure.git && cd azure && chmod +x install.sh && sudo ./install.sh
+```
 
 ## 🖥️ 第三步：使用Web面板
 
