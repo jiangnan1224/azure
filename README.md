@@ -61,7 +61,7 @@ git clone https://github.com/SIJULY/azure.git && cd azure && chmod +x install.sh
 ## 🖥️ 第三步：使用Web面板
 
 1.  **访问面板**: 在浏览器中打开 `http://您的服务器IP`。
-2.  **首次登录**: 密码在 `app.py` 文件中设置，默认为 `050148Sq$`。
+2.  **首次登录**: 密码在 `app.py` 文件中设置，默认为 `You22kme#12345`。
 3.  **添加Azure账户**:
     * 登录后，在左上角的表单中，填入您在**第一步**获取到的凭据。
     * **对应关系如下**:
