@@ -104,6 +104,9 @@
     sudo journalctl -u azureapp.service -f
     ```
 
-## 📂 一键安装脚本：git clone https://github.com/SIJULY/azure.git && cd azure && chmod +x install.sh && sudo ./install.sh
+## 📂 一键安装脚本：
+    ```bash
+   git clone https://github.com/SIJULY/azure.git && cd azure && chmod +x install.sh && sudo ./install.sh
+    ```
 
 
