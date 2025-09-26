@@ -114,7 +114,7 @@
 #!/bin/bash
 set -e
 # 【重要】请将下面的URL替换为您自己的GitHub仓库地址！
-GIT_REPO_URL="[https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)"
+GIT_REPO_URL="[https://github.com/SIJULY/azure.git](https://github.com/SIJULY/azure.git))"
 APP_DIR="/root/azure-web-app"
 SERVICE_NAME="azureapp"
 echo "================================================="; echo "  Azure VM Management Panel 一键部署脚本  "; echo "================================================="
