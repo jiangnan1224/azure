@@ -4,6 +4,11 @@
 
 本项目整合了所有必需的前后端代码、配置文件和一键部署脚本，旨在方便用户在任何新的 Debian/Ubuntu VPS 上快速部署和使用。
 
+<img width="1536" height="1819" alt="c5a31738-e84a-46a1-9949-c2501c1e8817" src="https://github.com/user-attachments/assets/b043c9f7-9f10-47c0-b443-102eb6fda1be" />
+
+<img width="1621" height="1698" alt="703410a7-332b-4e62-8a13-b4021ef97fda" src="https://github.com/user-attachments/assets/ba284577-8e81-4dae-ad0c-ff48292d45ac" />
+
+
 ## ✨ 特性
 
 - **多账户管理**: 安全地在本地 `json` 文件中保存和切换多个 Azure 账户凭据。
