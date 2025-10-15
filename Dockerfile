@@ -1,18 +1,34 @@
-# 使用官方的轻量级 Python 镜像。
-# https://hub.docker.com/_/python
-FROM python:3.11-slim
+# Stage 1: Build Stage
+FROM python:3.11-slim AS builder
 
-# 设置工作目录
 WORKDIR /app
 
-# 先复制所有代码
-COPY . .
-
-# 安装 uv
+# Install uv
 RUN pip install uv
 
-# 安装依赖
-RUN uv pip install . --system --no-cache
+# Copy only requirements to cache layer
+COPY requirements.txt .
 
-# 运行应用的命令
-CMD ["python", "main.py"]
+# Install dependencies using uv
+RUN uv pip install -r requirements.txt --system --no-cache
+
+# Copy the rest of the application code
+COPY . .
+
+# Stage 2: Production Stage
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copy installed dependencies from the builder stage
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/bin/uv /usr/local/bin/uv
+
+# Copy the application code
+COPY --from=builder /app .
+
+# Expose port (if your Flask app listens on a specific port, e.g., 5002)
+EXPOSE 5002
+
+# Run the application
+CMD ["python", "app.py"]
