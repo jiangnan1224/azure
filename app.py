@@ -8,8 +8,10 @@ from azure.mgmt.resource import ResourceManagementClient, SubscriptionClient
 from azure.core.exceptions import ClientAuthenticationError, ResourceNotFoundError, HttpResponseError
 
 app = Flask(__name__)
-app.secret_key = 'a_very_secret_key_for_azure_panel'
-PASSWORD = "You22kme#12345"
+# 从环境变量获取密码，如果没有设置则使用默认值
+PASSWORD = os.environ.get('AZURE_PANEL_PASSWORD', 'You22kme#12345')
+# 使用 PASSWORD 来生成 secret_key，确保每次密码更改时 secret_key 也会更改
+app.secret_key = f'azure_panel_{PASSWORD}_secret_key_{os.environ.get("SECRET_KEY_SALT", "default")}'
 KEYS_FILE = "azure_keys.json"
 DATABASE = 'tasks.db'
 
@@ -259,4 +261,6 @@ def task_status(task_id):
 init_db()
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    # 监听所有网络接口，从环境变量获取端口号
+    port = int(os.environ.get('PORT', 5002))
+    app.run(host='0.0.0.0', port=port, debug=False)
