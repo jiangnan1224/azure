@@ -1,3 +1,8 @@
+# Stage 1: Build Stage
+FROM --platform=$BUILDPLATFORM python:3.11-slim AS builder
+
+WORKDIR /app
+
 # Copy requirements first for better cache
 COPY requirements.txt .
 
