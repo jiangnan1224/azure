@@ -3,6 +3,12 @@ name: Docker Multi-Platform Build
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Docker image tag (default: latest)'
+        required: false
+        default: 'latest'
 
 jobs:
   build:
@@ -30,4 +36,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: jiangnan24/azure-management:latest
+          tags: jiangnan24/azure-management:${{ github.event_name == 'workflow_dispatch' && inputs.tag || 'latest' }}
