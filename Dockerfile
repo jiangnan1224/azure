@@ -1,5 +1,5 @@
 # Stage 1: Build Stage
-FROM --platform=$BUILDPLATFORM python:3.11-slim AS builder
+FROM --platform=$TARGETPLATFORM python:3.11-alpine AS builder
 
 WORKDIR /app
 
@@ -7,10 +7,16 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install build dependencies and Python packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc python3-dev \
-    && pip install --user --no-cache-dir -r requirements.txt \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    python3-dev \
+    libffi-dev \
+    openssl-dev \
+    cargo \
+    rust \
+    build-base \
+    && pip install --user --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY . .
@@ -20,8 +26,19 @@ FROM --platform=$TARGETPLATFORM python:3.11-alpine
 
 WORKDIR /app
 
-# Install required runtime packages
-RUN apk add --no-cache libstdc++ libffi
+# Install required runtime packages for cryptography and other dependencies
+RUN apk add --no-cache \
+    libstdc++ \
+    libffi \
+    libc6-compat \
+    libgcc \
+    linux-headers \
+    build-base \
+    python3-dev \
+    libffi-dev \
+    openssl-dev \
+    cargo \
+    rust
 
 # Copy installed dependencies from builder
 COPY --from=builder /root/.local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
