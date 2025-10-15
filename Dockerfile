@@ -3,6 +3,13 @@ FROM python:3.11-slim AS builder
 
 WORKDIR /app
 
+# Install build dependencies for Python packages with C extensions
+# This provides gcc and Python development headers for compilation.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install uv
 RUN pip install uv
 
