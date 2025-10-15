@@ -12,8 +12,8 @@ app = Flask(__name__)
 PASSWORD = os.environ.get('AZURE_PANEL_PASSWORD', 'You22kme#12345')
 # 使用 PASSWORD 来生成 secret_key，确保每次密码更改时 secret_key 也会更改
 app.secret_key = f'azure_panel_{PASSWORD}_secret_key_{os.environ.get("SECRET_KEY_SALT", "default")}'
-KEYS_FILE = os.path.join('data', 'azure_keys.json')
-DATABASE = os.path.join('data', 'tasks.db')
+KEYS_FILE = "azure_keys.json"
+DATABASE = 'tasks.db'
 
 # 配置日志输出到标准输出
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
