@@ -5,17 +5,14 @@ FROM python:3.11-slim
 # 设置工作目录
 WORKDIR /app
 
+# 先复制所有代码
+COPY . .
+
 # 安装 uv
 RUN pip install uv
 
-# 复制依赖定义文件
-COPY pyproject.toml .
-
 # 安装依赖
 RUN uv pip install . --system --no-cache
-
-# 复制剩余的应用代码
-COPY . .
 
 # 运行应用的命令
 CMD ["python", "main.py"]
